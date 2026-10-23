@@ -4,6 +4,10 @@ const Task = require('../models/Task');
 const { validate } = require('../middleware/validate');
 const router = express.Router();
 
+router.get('/health', (req, res) => {
+  res.json({ status: 'ok', service: 'task-api' });
+});
+
 const taskRules = [
   body('title').trim().isLength({ min: 3, max: 120 }).withMessage('title must be 3-120 characters'),
   body('completed').optional().isBoolean().toBoolean(),
